@@ -1,0 +1,21 @@
+use [QuanLySinhVien]
+CREATE TABLE SinhVien (
+    MaSo INT PRIMARY KEY,              -- Mã số sinh viên (Khóa chính)
+    HoTen NVARCHAR(100) NOT NULL,      -- Họ tên sinh viên
+    NgaySinh DATE,                     -- Ngày sinh
+    GioiTinh NVARCHAR(10),             -- Giới tính (Nam/Nữ)
+    Lop NVARCHAR(50)                   -- Lớp
+);
+CREATE TABLE MonHoc (
+    MaMonHoc INT PRIMARY KEY,          -- Mã môn học (Khóa chính)
+    TenMonHoc NVARCHAR(100) NOT NULL,  -- Tên môn học
+    SoTinChi INT NOT NULL              -- Số tín chỉ
+);
+CREATE TABLE Diem (
+    MaSo INT,                          -- Mã số sinh viên (Khóa ngoại)
+    MaMonHoc INT,                      -- Mã môn học (Khóa ngoại)
+    DiemThi FLOAT,                     -- Điểm thi
+    PRIMARY KEY (MaSo, MaMonHoc),      -- Khóa chính kết hợp
+    FOREIGN KEY (MaSo) REFERENCES SinhVien(MaSo),
+    FOREIGN KEY (MaMonHoc) REFERENCES MonHoc(MaMonHoc)
+);
